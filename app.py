@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, redirect, render_template, request
 from flask_cors import CORS
 import json
-
+import random
 import numpy as np
 
 def loadCsvSkipCommentAndRows(filename, skipRows):
@@ -20,7 +20,26 @@ def process():
             Sweat = json['sweat']
             Temperature = json['temperature']
             Movement = json['movement']
-            Index = 0
+            exercising = False
+            Overload = False
+            NormalSweat = 100
+            Compared = 0
+            if movement >= 30:
+                exercising = True
+            if exercising == True:
+                NormalSweat = 300
+                if sweat <= 100:
+                    Overload = True
+            Compared = abs((sweat - NormalSweat) * (temperature ** (-.455)))
+            if Overload == True:
+                Compared += 100
+            if Compared <= 8:
+                print("green")
+            elif Compared <= 35:
+                print("yellow")
+            else:
+                print("red")
+            Index = Compared
             row = ", ".join([str(Sweat), str(Temperature), str(Movement)]) + '\n'
             csv_file.write(row)
         return "Success"
