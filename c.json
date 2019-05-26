@@ -1,0 +1,10 @@
+{
+  apps : [
+    {
+      name      : "Metrohacks 2019 API",
+      script    : "python",
+      interpreter: "none",
+      args: "app.py"
+    }
+  ]
+}
