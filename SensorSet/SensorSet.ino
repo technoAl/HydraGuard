@@ -35,14 +35,32 @@ void loop() {
   if(Serial1.available()) {
     char c = Serial1.read();
     if(c == '1'){
-      tone(buzzer, 440, 100);
+      tone(buzzer, 880, 500);
+      delay(750);
+      tone(buzzer, 1046, 500);
+       delay(750);
+      tone(buzzer, 1318, 500);
+       delay(750);
     }else if(c == '2'){
-      
+      tone(buzzer, 220.5, 500);
+      delay(750);
+      tone(buzzer, 138.5, 500);
+       delay(750);
+      tone(buzzer, 164.5, 500);
+       delay(750);
     }else{
-      
+      tone(buzzer, 220, 500);
+      delay(750);
+      tone(buzzer, 220, 500);
+       delay(750);
+      tone(buzzer, 220, 500);
+       delay(750);
+       tone(buzzer, 220, 500);
+       delay(750);
+       tone(buzzer, 220, 500);
+       delay(750);
     }
   }
-  
   digitalWrite(led, HIGH);
   
   int reading = analogRead(A9);
@@ -57,15 +75,18 @@ void loop() {
   localSweat[place] = sweatReading;
   localTemp[place] = temperatureF;
   
-  // Serial.println(counter);
   Serial1.print("s:");
   Serial1.println(sweatReading);
-  //Serial.println(sweatReading);
   Serial1.print("t:");
   Serial1.println(temperatureF);
   Serial1.print("m:");
+  Serial1.println(mvmntReading);
+  Serial.print("s:");
+  Serial.println(sweatReading);
+  Serial.print("t:");
+  Serial.println(temperatureF);
+  Serial.print("m:");
   Serial.println(mvmntReading);
-  //Serial.println(temperatureF);
   counter++; 
   delay(1000);
 }
