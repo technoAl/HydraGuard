@@ -24,7 +24,7 @@ def process():
             Overload = False
             NormalSweat = 100
             Compared = 0
-            if movement >= 30:
+            if Movement >= 30:
                 exercising = True
             if exercising == True:
                 NormalSweat = 300
@@ -32,7 +32,7 @@ def process():
                     Overload = True
             Compared = abs((sweat - NormalSweat) * (temperature ** (-.455)))
             if Overload == True:
-                Compared += 100
+                Compared += 50
             if Compared <= 8:
                 print("green")
             elif Compared <= 35:
@@ -67,6 +67,12 @@ def hi2():
     g[2] = np.sum(csv[-60:,2])
     g[3] = np.average(csv[-60:,3])
     return jsonify(sweat=g[0], temperature=g[1], movement=g[2], hydration=g[3])
+
+@app.route('/oneminutehydration', methods=["GET"])
+def hi3():
+    csv = loadCsvSkipCommentAndRows("sensor.csv", 0)
+    g = np.average(csv[-60:,3])
+    return jsonify(hydration=g)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=20003)
